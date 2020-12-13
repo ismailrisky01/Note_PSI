@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.note_psi.R
@@ -67,6 +68,10 @@ class EditFragment : Fragment(), View.OnClickListener {
             }
             R.id.delete -> {
                 delete()
+                true
+            }
+            R.id.save->{
+                edit()
                 true
             }
 

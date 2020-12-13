@@ -80,12 +80,11 @@ class HomeFragment : OptionMenu(), View.OnClickListener {
             adapter.setListData(it)
             adapter.notifyDataSetChanged()
         })
-
     }
 
     override fun onClick(p0: View?) {
         when (p0?.id) {
-            R.id.floatingActionButton -> findNavController().navigate(R.id.action_homeFragment_to_editFragment)
+            R.id.floatingActionButton -> findNavController().navigate(R.id.action_homeFragment_to_addFragment2)
         }
     }
 

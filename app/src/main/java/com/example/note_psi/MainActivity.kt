@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         if (user != null) {
 
         } else {
-
             findNavController(nav_host_fragment.id).navigate(R.id.action_homeFragment_to_loginFragment)
 
         }

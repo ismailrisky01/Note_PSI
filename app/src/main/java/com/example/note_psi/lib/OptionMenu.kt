@@ -8,29 +8,11 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.note_psi.R
 
-open class OptionMenu : Fragment() {
-    private var progressBar: ProgressBar? = null
+open class OptionMenu : Google() {
 
-    fun setProgressBar(bar: ProgressBar) {
-        progressBar = bar
-    }
-
-    fun showProgressBar() {
-        progressBar?.visibility = View.VISIBLE
-    }
-
-    fun hideProgressBar() {
-        progressBar?.visibility = View.INVISIBLE
-    }
-
-
-
-    public override fun onStop() {
-        super.onStop()
-        hideProgressBar()
-    }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
@@ -50,6 +32,13 @@ open class OptionMenu : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 val myPreference = SharedPref(requireContext())
                 myPreference.setData(1)
+                true
+            }
+            R.id.logOut -> {
+                signOut()
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+
+
                 true
             }
 
