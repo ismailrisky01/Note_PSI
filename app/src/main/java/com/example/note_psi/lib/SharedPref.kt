@@ -8,7 +8,6 @@ class SharedPref(context: Context) {
     val preference = context.getSharedPreferences(DATA_TEMA,Context.MODE_PRIVATE)
 
 
-
     fun getData():Int?{
         return preference.getInt(KEY_DATA_TEMA,0)
     }

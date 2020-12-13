@@ -36,8 +36,8 @@ open class OptionMenu : Google() {
             }
             R.id.logOut -> {
                 signOut()
+                requireActivity().finish()
                 findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
-
 
                 true
             }

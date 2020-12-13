@@ -21,11 +21,13 @@ class MainActivity : AppCompatActivity() {
         }else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
+
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
+            findNavController(nav_host_fragment.id).navigate(R.id.action_loginFragment_to_homeFragment)
 
         } else {
-            findNavController(nav_host_fragment.id).navigate(R.id.action_homeFragment_to_loginFragment)
+//            findNavController(nav_host_fragment.id).navigate(R.id.action_homeFragment_to_loginFragment)
 
         }
     }

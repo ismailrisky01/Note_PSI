@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
 open class Google : Fragment() {
-
+//Class yang digunakan untuk login
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
@@ -53,11 +53,12 @@ open class Google : Fragment() {
             }
         }
     }
-
+    //Fungsi login
      fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
+    //Fungsi logout
     fun signOut() {
         // Firebase sign out
         firebaseAuth?.signOut()

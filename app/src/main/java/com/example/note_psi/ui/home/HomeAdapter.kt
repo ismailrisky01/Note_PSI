@@ -29,15 +29,13 @@ class HomeAdapter(context: Context) : RecyclerView.Adapter<HomeAdapter.ViewHolde
             addItem
         )
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = dataList[position]
         holder.itemView.txtJudul.text = data.judul
-
         holder.data(data)
 
+//RndomWarna
         val r = Random()
-
         val red: Int = r.nextInt(255 - 0 + 1) + 0
         val green: Int = r.nextInt(255 - 0 + 1) + 0
         val blue: Int = r.nextInt(255 - 0 + 1) + 0
@@ -65,7 +63,6 @@ class HomeAdapter(context: Context) : RecyclerView.Adapter<HomeAdapter.ViewHolde
                 bundle.putString("judul", judul)
                 bundle.putString("keterangan", keternagan)
                 bundle.putBoolean("kategori", kategori)
-
                 it.findNavController().navigate(R.id.action_homeFragment_to_editFragment, bundle)
             }
         }

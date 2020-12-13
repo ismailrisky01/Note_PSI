@@ -21,14 +21,8 @@ import kotlinx.android.synthetic.main.fragment_edit.*
 
 class EditFragment : Fragment(), View.OnClickListener {
     private val MainView by lazy {
-        ViewModelProvider(this).get(ViewModel::class.java)
+        ViewModelProvider(this).get(ViewModel::class.java) //Menginisialisasi viewModel
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     var id: String = ""
 
     override fun onCreateView(
@@ -42,7 +36,7 @@ class EditFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//Mengambil data bundle dari fragmentHome
         arguments.apply {
             id = this?.getString("id").toString()
             val judul = this?.getString("judul").toString()
@@ -51,9 +45,9 @@ class EditFragment : Fragment(), View.OnClickListener {
             edtEditJudul.setText(judul)
             edtEditKeterngan.setText(keterangan)
         }
-
     }
 
+    //Menampilkan option menu
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_edit, menu)
@@ -63,18 +57,17 @@ class EditFragment : Fragment(), View.OnClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.pin -> {
-                pin()
+                MainView.pin(id)
                 true
             }
             R.id.delete -> {
                 delete()
                 true
             }
-            R.id.save->{
+            R.id.save -> {
                 edit()
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -88,18 +81,21 @@ class EditFragment : Fragment(), View.OnClickListener {
                         snapshot.children.forEach {
 
                             val data = it.getValue(Data::class.java)
-                            if (!data!!.kategori){
-                                FirebaseDatabase.getInstance().reference.child("PSI").child(FirebaseAuth.getInstance().uid.toString()).child(it.key.toString()).child("kategori").setValue(true)
-                            }else{
-                                FirebaseDatabase.getInstance().reference.child("PSI").child(FirebaseAuth.getInstance().uid.toString()).child(it.key.toString()).child("kategori").setValue(false)
+                            if (!data!!.kategori) {
+                                FirebaseDatabase.getInstance().reference.child("PSI")
+                                    .child(FirebaseAuth.getInstance().uid.toString())
+                                    .child(it.key.toString()).child("kategori").setValue(true)
+                            } else {
+                                FirebaseDatabase.getInstance().reference.child("PSI")
+                                    .child(FirebaseAuth.getInstance().uid.toString())
+                                    .child(it.key.toString()).child("kategori").setValue(false)
                             }
                             Toast.makeText(requireContext(), "" + it.key, Toast.LENGTH_SHORT).show()
                         }
-
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        Log.d("MSG",""+error.message)
+                        Log.d("MSG", "" + error.message)
                     }
                 })
     }

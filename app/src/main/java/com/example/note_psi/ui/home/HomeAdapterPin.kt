@@ -16,7 +16,7 @@ import java.util.*
 
 
 class HomeAdapterPin(context: Context) : RecyclerView.Adapter<HomeAdapterPin.ViewHolder>() {
-    val listdata = arrayListOf("1", "2", "3")
+
     private var dataList = mutableListOf<Data>()
     fun setListData(settingData: MutableList<Data>) {
         dataList = settingData

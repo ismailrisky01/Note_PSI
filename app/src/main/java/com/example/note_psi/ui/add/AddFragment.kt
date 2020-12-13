@@ -15,6 +15,7 @@ import java.util.*
 
 
 class AddFragment : Fragment(), View.OnClickListener {
+    //Menginisialisasi viewmodel
     private val viewModel by lazy {
         ViewModelProvider(this).get(ViewModel::class.java)
     }
@@ -43,7 +44,7 @@ class AddFragment : Fragment(), View.OnClickListener {
         val id = UUID.randomUUID().toString()
         val judul = edtJudul.text.toString()
         val keterangan = edtKeterngan.text.toString()
-        viewModel.addData(Data(id,judul,keterangan,false))
+        viewModel.addData(Data(id,judul,keterangan,false)) // Menambahkan data dengan parameter Data
         findNavController().navigate(R.id.action_addFragment_to_homeFragment)
     }
 

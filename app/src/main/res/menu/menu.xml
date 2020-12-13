@@ -10,5 +10,4 @@
     <item android:id="@+id/lightmode"
         android:title="Light Mode"
         app:showAsAction="never"/>
-
 </menu>

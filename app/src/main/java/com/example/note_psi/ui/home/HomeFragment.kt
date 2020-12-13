@@ -17,21 +17,25 @@ import com.example.note_psi.lib.Repo
 import com.example.note_psi.lib.ViewModel
 import com.example.note_psi.model.Data
 import com.example.note_psi.ui.HomeAdapterPin
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.ArrayList
 
 
 class HomeFragment : OptionMenu(), View.OnClickListener {
     var adapterpin: HomeAdapterPin? = null
+    //Menginisialisai VIewModel
     private val homeMainView by lazy {
         ViewModelProvider(this).get(ViewModel::class.java)
     }
+
     private lateinit var adapter: HomeAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -39,6 +43,8 @@ class HomeFragment : OptionMenu(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val user = FirebaseAuth.getInstance().currentUser
+
         adapter = HomeAdapter(requireContext())
         adapterpin = HomeAdapterPin(requireContext())
         recyclerviewHome.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -69,17 +75,20 @@ class HomeFragment : OptionMenu(), View.OnClickListener {
     }
 
     private fun observePin() {
-        homeMainView.getData(true).observe(viewLifecycleOwner, Observer {
+        val user = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        homeMainView.getData(user,true).observe(viewLifecycleOwner, Observer {
             adapterpin?.setListData(it)
             adapterpin?.notifyDataSetChanged()
         })
     }
 
     private fun observe() {
-        homeMainView.getData(false).observe(viewLifecycleOwner, Observer {
+        val user = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        homeMainView.getData(user,false).observe(viewLifecycleOwner, Observer {
             adapter.setListData(it)
             adapter.notifyDataSetChanged()
         })
+
     }
 
     override fun onClick(p0: View?) {

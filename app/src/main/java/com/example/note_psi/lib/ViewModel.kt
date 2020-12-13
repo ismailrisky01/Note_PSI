@@ -9,10 +9,10 @@ import com.google.android.gms.tasks.OnCompleteListener
 
 class ViewModel: ViewModel() {
     private val repo = Repo
-    fun getData(kategori:Boolean): LiveData<MutableList<Data>> {
+    fun getData(user:String,kategori:Boolean): LiveData<MutableList<Data>> {
 
         val mutableData = MutableLiveData<MutableList<Data>>()
-        repo.getdata(kategori).observeForever {
+        repo.getdata(user,kategori).observeForever {
             mutableData.value = it
         }
         return mutableData
@@ -26,6 +26,9 @@ class ViewModel: ViewModel() {
     }
     fun deleteData(id:String){
         repo.deleteData(id)
+    }
+    fun pin(id: String){
+        repo.pin(id)
     }
 
 }
