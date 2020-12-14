@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.note_psi.lib.SharedPref
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val myPreference = SharedPref(this)
-        if (myPreference.getData()!! == 1){
+        if (myPreference.getData()== 1){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -24,10 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            findNavController(nav_host_fragment.id).navigate(R.id.action_loginFragment_to_homeFragment)
+//            findNavController(nav_host_fragment.id).navigate(R.id.action_loginFragment_to_homeFragment)
 
         } else {
-//            findNavController(nav_host_fragment.id).navigate(R.id.action_homeFragment_to_loginFragment)
+            findNavController(nav_host_fragment.id).navigate(R.id.action_homeFragment_to_loginFragment)
 
         }
     }
